@@ -5,18 +5,21 @@ const capitalise = string => string.split('-').map(
   part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
 ).join('-');
 
+const buildBody = body => ({ data: body, encoding: 'text', inputTruncated: false });
+
 const buildHeaders = headers => Object.keys(headers).reduce((hdrs, key) => ({
   ...hdrs,
   [key.toLowerCase()]: [{ key: capitalise(key), value: headers[key].toString() }]
 }), {});
 
-const buildRequest = ({ method = 'GET', headers = {}, originHeaders, ...request }) => ({
+const buildRequest = ({ method = 'GET', headers = {}, originHeaders, body, ...request }) => ({
   method,
   ...request,
   headers: buildHeaders(headers),
   ...(originHeaders ? {
     origin: { custom: { customHeaders: buildHeaders(originHeaders) } }
-  } : {})
+  } : {}),
+  ...(body ? { body: buildBody(body) } : {})
 });
 
 const buildEvent = ({ request = {}, response }) => ({ Records: [{ cf: {
