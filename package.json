@@ -1,0 +1,13 @@
+{
+  "name": "moromi-aws-lambda-edge",
+  "version": "0.0.1",
+  "description": "aws lambda@edge plugin for moromi",
+  "main": "index.js",
+  "repository": "git@github.com:adriaan-pelzer/moromi-aws-lambda-edge.git",
+  "author": "Adriaan Pelzer <adriaan.pelzer@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lambda-edge-response": "^0.0.3",
+    "moromi-aws-lambda": "^0.0.2"
+  }
+}
